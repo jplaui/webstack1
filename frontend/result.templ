@@ -1,0 +1,55 @@
+package frontend
+
+import(
+    c "github.com/jplaui/templ-fiber/context"
+    "github.com/jplaui/templ-fiber/frontend/scripts"
+)
+
+func resultBaseConfig() BaseConfig {
+    return BaseConfig{
+        Bulma: true,
+        Toast: true,
+        Fontawesome: true,
+        Aos: true,
+        Footer: true,
+        Navbar: true,
+    }
+}
+
+templ Results(lists string, html templ.Component) {
+    @Layout1(resultBaseConfig()) {
+
+        <!-- additional css per page -->
+        <style type="text/css">
+            div.hero-body {
+                text-align: center;
+                margin-top: 52px;
+            }
+        </style>
+
+        <!-- Header -->
+        <div class="hero-body" data-aos="fade-in">
+            <div class="container">
+                <h1 class="title is-1">
+                    Scan Results of List: { lists }
+                </h1>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <section>
+            <div class="container p-6 has-text-centered">
+                <!-- <iframe> -->
+                    @html
+                <!-- </iframe> -->
+            </div>
+        </section>
+
+        <!-- back -->
+        <div class="container mt-6 p-6 has-text-centered">
+            <a href="/" class="button is-danger is-light">Back</a>
+        </div>
+    }
+
+    @scripts.InitToast(c.GetCtxNotification(ctx))
+}

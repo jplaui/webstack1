@@ -1,0 +1,72 @@
+package frontend
+
+type BaseConfig struct {
+	Bulma bool 
+	Toast bool
+    Footer bool
+    Fontawesome bool
+    Aos bool
+    Navbar bool
+}
+
+templ Layout1(config BaseConfig) {
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>example.de</title>
+        if config.Bulma {
+            <link rel="stylesheet" href="/assets/bulma/bulma.min.css"></link>
+        }
+        if config.Fontawesome {
+            <link rel="stylesheet" href="/assets/fontawesome-free-6.5.1-web/css/all.css"/>
+        }
+        if config.Aos {
+            <link rel="stylesheet" href="/assets/aos/aos.css" />
+        }
+        if config.Toast {
+            <script type="text/javascript" src="/assets/bulma/bulma-toast.min.js"></script>
+        }
+        <!-- can import assets global.css here -->
+         <link rel="stylesheet" href="/assets/global.css" />
+    </head>
+    <body>
+
+        <div class="columns is-flex-direction-column is-fullheight-100vh m-0">
+
+            if config.Navbar {
+                @Navbar1()
+            }
+
+            <!-- base layout -->
+            <div class="column p-0">
+                { children... }
+            </div>
+
+            <!-- Footer -->
+            if config.Footer {
+                <footer class="footer column is-narrow">
+                    <div class="section-heading" data-aos="fade-in">
+                        <p>
+                        <strong>©</strong> 2024 Example.de
+                        </p>
+                    </div>
+                </footer>
+            }
+        </div>
+
+        <!-- init aos for transitions -->
+        if config.Aos {
+            <script src="/assets/aos/aos.js"></script>
+            <script>
+                AOS.init({
+                    once: true,
+                });
+            </script>
+        }
+
+    </body>
+    </html>
+}

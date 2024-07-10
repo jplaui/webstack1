@@ -1,0 +1,63 @@
+package frontend
+
+templ NotFound() {
+    <div>404</div>
+}
+
+templ Navbar1() {
+    <!-- Navigation bar -->
+    <nav class="navbar is-fixed-top is-info is-light">
+        <div class="navbar-brand">
+            <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+            <span></span>
+            <span></span>
+            <span></span>
+            </div>
+        </div>
+
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/">
+                    <span class="icon">
+                    <i class="fa-solid fa-house"></i>
+                    </span>
+                    <span>Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    @initJs()
+}
+
+script initJs() {
+    // The following code is based off a toggle menu by @Bradcomp
+    // source: https://gist.github.com/Bradcomp/a9ef2ef322a8e8017443b626208999c1
+    (function() {
+        var burger = document.querySelector('.burger');
+        var menu = document.querySelector('#'+burger.dataset.target);
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('is-active');
+            menu.classList.toggle('is-active');
+        });
+
+        // Add a click event on various child elements to close the parent modal
+        document.querySelectorAll('.navbar-item').forEach((target) => {
+
+            target.addEventListener('click', function() {
+                burger.classList.toggle('is-active');
+                menu.classList.toggle('is-active');
+            });
+
+        });
+
+        // Add a keyboard event to close all modals
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Escape') {
+                burger.classList.remove('is-active');
+                menu.classList.remove('is-active');
+            }
+        });
+        
+    })();
+}

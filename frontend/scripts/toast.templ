@@ -1,0 +1,13 @@
+package scripts
+
+script InitToast(msgtext string, err bool) {
+    if (msgtext != "") {
+        setTimeout(function () {
+            if (!err) {
+                bulmaToast.toast({ message: msgtext, type: 'is-success' });
+            } else {
+                bulmaToast.toast({ message: msgtext, type: 'is-danger' });
+            }
+        }, 500);
+    }
+}
